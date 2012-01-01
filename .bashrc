@@ -11,7 +11,7 @@ fi
 if [ -e ~/work/node.js/.nvm/nvm.sh ]
   then
     . ~/work/node.js/.nvm/nvm.sh
-    nvm use "v0.6.6" 2>&1 /dev/null
+    nvm use "v0.6.6" > /dev/null 2>&1
 fi
 
 export HISTSIZE=300000
