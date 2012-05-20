@@ -17,13 +17,13 @@ runtime! debian.vim
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
-if has("syntax")
-  syntax on
-endif
+"if has("syntax")
+"  syntax on
+"endif
 
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
-set background=dark
+" set background=dark
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -62,12 +62,30 @@ set lcs=tab:>-,eol:-
 
 filetype off
 
-set runtimepath+=~/.vim/neobundle.vim.git
+set runtimepath+=~/.vim/neobundle.vim
 call neobundle#rc(expand('~/.bundle'))
 
 NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
-NeoBundle 'project.vim'
-NeoBundle 'hatena-vim'
+NeoBundle 'git://github.com/Shougo/unite.vim.git'
+NeoBundle 'git://github.com/Shougo/vimfiler.git'
+NeoBundle 'git://github.com/mattn/webapi-vim.git'
+NeoBundle 'git://github.com/mattn/twipass-vim.git'
+NeoBundle 'git://github.com/tyru/open-browser.vim.git'
+NeoBundle 'git://github.com/vim-ruby/vim-ruby.git'
+NeoBundle 'git://github.com/tpope/vim-rails.git'
+NeoBundle 'git://github.com/thinca/vim-quickrun.git'
+NeoBundle 'git://github.com/Lokaltog/vim-powerline.git'
+NeoBundle 'git://github.com/glidenote/memolist.vim.git'
+NeoBundle 'git://github.com/h1mesuke/unite-outline.git'
+NeoBundle 'surround.vim'
+NeoBundle 'matchit.vim'
+NeoBundle 'srcexpl.vim'
+NeoBundle 'trinity.vim'
+NeoBundle 'NERD_tree.vim'
+NeoBundle 'taglist.vim'
+NeoBundle 'Javascript-syntax'
+NeoBundle 'TwitVim'
+NeoBundle 'sudo.vim'
 
 filetype plugin on
 filetype indent on
@@ -96,7 +114,7 @@ set cursorline
 " syntax color
 " ---------------------
 syntax on
-colorscheme evening
+colorscheme torte
 highlight LineNr ctermfg=darkgray
 highlight CursorLine ctermbg=darkblue
 
@@ -115,6 +133,7 @@ set backspace=indent,eol,start
 set clipboard=unnamed
 set guioptions+=a
 set pastetoggle=<F12>
+vnoremap y "+y
 
 " tab
 " --------------------
@@ -192,16 +211,52 @@ set runtimepath+=$HOME/work/hatena
 let g:hatena_user='shim0mura'
 au BufRead,BufNewFile *.htn set filetype=hatena
 
-" Setting for project.vim
+
+" Setting for twitvim
 " -------------------------------------------
-if getcwd() != $HOME
-  if filereadable(getcwd(). '/.vimprojects')
-    Project .vimprojects
-  endif
+"let twitvim_login = "tatshimomura:tatsuhiko1" 
+let twitvim_login = "shim0mura:tatsuhiko1" 
+
+
+" Setting for vim-powerline
+" -------------------------------------------
+let g:Powerline_symbols = 'fancy'
+set t_Co=256
+
+
+" Setting for memolist.vim
+" -------------------------------------------
+let g:memolist_path = "~/work/memo"
+
+
+" Setting for NERDTree
+" -------------------------------------------
+let file_name = expand("%:p")
+if has('vim_starting') &&  file_name == ""
+    autocmd VimEnter :NERDTree ./
 endif
-
-
-
-
-
-
+ 
+" カーソルが外れているときは自動的にnerdtreeを隠す
+"function! ExecuteNERDTree()
+"    "b:nerdstatus = 1 : NERDTree 表示中
+"    "b:nerdstatus = 2 : NERDTree 非表示中
+" 
+"    if !exists('g:nerdstatus')
+"        "execute 'NERDTree ./'
+"        let g:windowWidth = winwidth(winnr())
+"        let g:nerdtreebuf = bufnr('')
+"        let g:nerdstatus = 1 
+" 
+"    elseif g:nerdstatus == 1 
+"        execute 'wincmd t'
+"        execute 'vertical resize' 0 
+"        execute 'wincmd p'
+"        let g:nerdstatus = 2 
+"    elseif g:nerdstatus == 2 
+"        execute 'wincmd t'
+"        execute 'vertical resize' g:windowWidth
+"        let g:nerdstatus = 1 
+"    endif
+"endfunction
+"noremap <c-e> :<c-u>:call ExecuteNERDTree()<cr>
+"</cr></c-u></c-e>
