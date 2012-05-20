@@ -8,11 +8,14 @@ fi
 # User specific aliases and functions
 
 # use Node.js version 0.6.6
-if [ -e ~/work/node.js/.nvm/nvm.sh ]
+if [ -e ~/.nvm/nvm.sh ]
   then
-    . ~/work/node.js/.nvm/nvm.sh
-    nvm use "v0.6.6" > /dev/null 2>&1
+    . ~/.nvm/nvm.sh
+    nvm use "v0.6.15" > /dev/null 2>&1
 fi
+
+# use rvm
+source $HOME/.rvm/scripts/rvm
 
 export HISTSIZE=300000
 export JSTESTDRIVER_HOME=~/jstest
