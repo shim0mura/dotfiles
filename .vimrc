@@ -67,7 +67,7 @@ call neobundle#rc(expand('~/.bundle'))
 
 NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
 NeoBundle 'git://github.com/Shougo/unite.vim.git'
-NeoBundle 'git://github.com/Shougo/vimfiler.git'
+NeoBundle 'git://github.com/Shougo/neocomplcache.git'
 NeoBundle 'git://github.com/mattn/webapi-vim.git'
 NeoBundle 'git://github.com/mattn/twipass-vim.git'
 NeoBundle 'git://github.com/tyru/open-browser.vim.git'
@@ -86,6 +86,7 @@ NeoBundle 'taglist.vim'
 NeoBundle 'Javascript-syntax'
 NeoBundle 'TwitVim'
 NeoBundle 'sudo.vim'
+NeoBundle 'log.vim'
 
 filetype plugin on
 filetype indent on
@@ -157,6 +158,8 @@ set directory=~/vim_swap
 imap <C-K>  <ESC>"*pa
 " edit .vimrc easily
 nnoremap <silent> <Space>ev  :<C-u>edit $MYVIMRC<CR>
+
+" Setting for Unite.vim
 " let g:unite_enable_start_insert=1
 " バッファ一覧
 nnoremap <silent> ;ub :<C-u>Unite buffer<CR>
@@ -164,15 +167,19 @@ nnoremap <silent> ;ub :<C-u>Unite buffer<CR>
 nnoremap <silent> ;uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 " レジスタ一覧
 nnoremap <silent> ;ur :<C-u>Unite -buffer-name=register register<CR>
-" 最近使用したファ; ル一覧
+" 最近使用したファイル一覧
 nnoremap <silent> ;um :<C-u>Unite file_mru<CR>
 " 常用セット
 nnoremap <silent> ;uu :<C-u>Unite buffer file_mru<CR>
+" unite outline 
+nnoremap <silent> ;uo :<C-u>Unite outline<CR>
 " 全部乗せ
 nnoremap <silent> ;ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
 
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
+
+
 
 "
 " -------------------------------------------------------------------
@@ -237,8 +244,7 @@ au BufRead,BufNewFile *.htn set filetype=hatena
 
 " Setting for twitvim
 " -------------------------------------------
-"let twitvim_login = "tatshimomura:tatsuhiko1" 
-let twitvim_login = "shim0mura:tatsuhiko1" 
+let twitvim_login = "shim0mura:vimdaisukilove" 
 
 
 " Setting for vim-powerline
@@ -254,11 +260,6 @@ let g:memolist_path = "~/work/memo"
 
 " Setting for NERDTree
 " -------------------------------------------
-let file_name = expand("%:p")
-if has('vim_starting') &&  file_name == ""
-    autocmd VimEnter :NERDTree ./
-endif
- 
 " カーソルが外れているときは自動的にnerdtreeを隠す
 "function! ExecuteNERDTree()
 "    "b:nerdstatus = 1 : NERDTree 表示中
@@ -283,3 +284,14 @@ endif
 "endfunction
 "noremap <c-e> :<c-u>:call ExecuteNERDTree()<cr>
 "</cr></c-u></c-e>
+
+" Setting for neocomplcache
+" -------------------------------------------
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Use camel case completion.
+let g:neocomplcache_enable_camel_case_completion = 1
+" Use underbar completion.
+let g:neocomplcache_enable_underbar_completion = 1
