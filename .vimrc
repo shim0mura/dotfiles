@@ -67,7 +67,7 @@ call neobundle#rc(expand('~/.bundle'))
 
 NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
 NeoBundle 'git://github.com/Shougo/unite.vim.git'
-NeoBundle 'git://github.com/Shougo/neocomplecache.git'
+NeoBundle 'git://github.com/Shougo/neocomplcache.git'
 NeoBundle 'git://github.com/mattn/webapi-vim.git'
 NeoBundle 'git://github.com/mattn/twipass-vim.git'
 NeoBundle 'git://github.com/tyru/open-browser.vim.git'
@@ -157,6 +157,8 @@ set directory=~/vim_swap
 imap <C-K>  <ESC>"*pa
 " edit .vimrc easily
 nnoremap <silent> <Space>ev  :<C-u>edit $MYVIMRC<CR>
+
+" Setting for Unite.vim
 " let g:unite_enable_start_insert=1
 " バッファ一覧
 nnoremap <silent> ;ub :<C-u>Unite buffer<CR>
@@ -168,6 +170,8 @@ nnoremap <silent> ;ur :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> ;um :<C-u>Unite file_mru<CR>
 " 常用セット
 nnoremap <silent> ;uu :<C-u>Unite buffer file_mru<CR>
+" unite outline 
+nnoremap <silent> ;uo :<C-u>Unite outline<CR>
 " 全部乗せ
 nnoremap <silent> ;ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
 
@@ -282,8 +286,6 @@ endif
 "endfunction
 "noremap <c-e> :<c-u>:call ExecuteNERDTree()<cr>
 "</cr></c-u></c-e>
-
-
 " Setting for neocomplcache
 " -------------------------------------------
 " Use neocomplcache.
