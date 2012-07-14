@@ -67,7 +67,7 @@ call neobundle#rc(expand('~/.bundle'))
 
 NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
 NeoBundle 'git://github.com/Shougo/unite.vim.git'
-NeoBundle 'git://github.com/Shougo/vimfiler.git'
+NeoBundle 'git://github.com/Shougo/neocomplecache.git'
 NeoBundle 'git://github.com/mattn/webapi-vim.git'
 NeoBundle 'git://github.com/mattn/twipass-vim.git'
 NeoBundle 'git://github.com/tyru/open-browser.vim.git'
@@ -164,7 +164,7 @@ nnoremap <silent> ;ub :<C-u>Unite buffer<CR>
 nnoremap <silent> ;uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 " レジスタ一覧
 nnoremap <silent> ;ur :<C-u>Unite -buffer-name=register register<CR>
-" 最近使用したファ; ル一覧
+" 最近使用したファイル一覧
 nnoremap <silent> ;um :<C-u>Unite file_mru<CR>
 " 常用セット
 nnoremap <silent> ;uu :<C-u>Unite buffer file_mru<CR>
@@ -237,6 +237,7 @@ au BufRead,BufNewFile *.htn set filetype=hatena
 
 " Setting for twitvim
 " -------------------------------------------
+let twitvim_login = "shim0mura:vimdaisukilove" 
 
 
 " Setting for vim-powerline
@@ -281,3 +282,15 @@ endif
 "endfunction
 "noremap <c-e> :<c-u>:call ExecuteNERDTree()<cr>
 "</cr></c-u></c-e>
+
+
+" Setting for neocomplcache
+" -------------------------------------------
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Use camel case completion.
+let g:neocomplcache_enable_camel_case_completion = 1
+" Use underbar completion.
+let g:neocomplcache_enable_underbar_completion = 1
