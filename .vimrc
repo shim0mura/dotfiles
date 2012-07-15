@@ -77,6 +77,7 @@ NeoBundle 'git://github.com/thinca/vim-quickrun.git'
 NeoBundle 'git://github.com/Lokaltog/vim-powerline.git'
 NeoBundle 'git://github.com/glidenote/memolist.vim.git'
 NeoBundle 'git://github.com/h1mesuke/unite-outline.git'
+NeoBundle 'git://github.com/ervandew/supertab.git'
 NeoBundle 'surround.vim'
 NeoBundle 'matchit.vim'
 NeoBundle 'srcexpl.vim'
@@ -94,13 +95,18 @@ filetype indent on
 " ----------------------
 set number
 set ruler
-set cmdheight=2
+set cmdheight=1
 set laststatus=2
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 set title
 set linespace=0
 set wildmenu
 set showcmd
+set list
+set lcs=tab:>-,nbsp:%
+" ウィンドウサイズの自動調整
+set noequalalways
+set ambiwidth=double
 "set textwidth=78
 "set columns=100
 "set lines=150
@@ -133,8 +139,6 @@ set backspace=indent,eol,start
 set clipboard=unnamed
 set guioptions+=a
 set pastetoggle=<F12>
-vnoremap y "+y
-
 " tab
 " --------------------
 set tabstop=2
@@ -153,10 +157,15 @@ set directory=~/vim_swap
 
 " keymaps
 " --------------------
+
 " paste clipboad in insert mode
 imap <C-K>  <ESC>"*pa
+
 " edit .vimrc easily
 nnoremap <silent> <Space>ev  :<C-u>edit $MYVIMRC<CR>
+
+" read help easily
+nnoremap <C-h> :<C-u>help<Space>
 
 " Setting for Unite.vim
 " let g:unite_enable_start_insert=1
@@ -177,6 +186,27 @@ nnoremap <silent> ;ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mr
 
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
+
+" コマンドモードでよくやるやつ
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-f> <Right>
+cnoremap <C-b> <Left>
+cnoremap <C-d> <Del>
+
+cnoremap <C-k> <Up>
+cnoremap <C-l> <Down>
+
+" 挿入モードでの移動
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
+
+" 全角スペース氏ね
+highlight SpecialKey cterm=NONE ctermfg=7 guifg=7
+highlight JpSpace cterm=underline ctermfg=7 guifg=7
+au BufRead,BufNew * match JpSpace /　/
 
 "
 " -------------------------------------------------------------------
