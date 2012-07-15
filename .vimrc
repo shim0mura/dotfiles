@@ -91,6 +91,7 @@ NeoBundle 'sudo.vim'
 filetype plugin on
 filetype indent on
 
+
 " display
 " ----------------------
 set number
@@ -103,19 +104,21 @@ set linespace=0
 set wildmenu
 set showcmd
 set list
-set lcs=tab:>-,nbsp:%
+set lcs=tab:>-
 " ウィンドウサイズの自動調整
 set noequalalways
 set ambiwidth=double
 "set textwidth=78
 "set columns=100
 "set lines=150
+"
 
 " view
 " ---------------------
 set showcmd
 set showmode
 set cursorline
+
 
 " syntax color
 " ---------------------
@@ -124,12 +127,14 @@ colorscheme torte
 highlight LineNr ctermfg=darkgray
 highlight CursorLine ctermbg=darkblue
 
+
 " search
 " ----------------------
 set ignorecase
 set smartcase
 set wrapscan
 set hlsearch
+
 
 " edit
 " ---------------------
@@ -139,6 +144,8 @@ set backspace=indent,eol,start
 set clipboard=unnamed
 set guioptions+=a
 set pastetoggle=<F12>
+
+
 " tab
 " --------------------
 set tabstop=2
@@ -148,6 +155,7 @@ set shiftwidth=2
 set shiftround
 "set nowrap
 
+
 " backup
 " --------------------
 set backup
@@ -155,37 +163,57 @@ set backupdir=~/vim_backup
 set swapfile
 set directory=~/vim_swap
 
+
 " keymaps
 " --------------------
 
 " paste clipboad in insert mode
 imap <C-K>  <ESC>"*pa
 
-" edit .vimrc easily
-nnoremap <silent> <Space>ev  :<C-u>edit $MYVIMRC<CR>
+" type command easily
+nnoremap <silent> <Space>.  :<C-u>edit $MYVIMRC<CR>
+nnoremap <Space>w :<C-u>write<Return>
+nnoremap <Space>q :<C-u>quit<Return>
+nnoremap <Space>Q :<C-u>quit!<Return>
+nnoremap <Space>h :help<space>
+nnoremap <Space>n :<C-u>new<space>
+nnoremap <Space>v :<C-u>vnew<space>
 
-" read help easily
-nnoremap <C-h> :<C-u>help<Space>
+
+" 行単位での移動
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+
 
 " Setting for Unite.vim
 " let g:unite_enable_start_insert=1
+
 " バッファ一覧
 nnoremap <silent> ;ub :<C-u>Unite buffer<CR>
+
 " ファイル一覧
 nnoremap <silent> ;uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+
 " レジスタ一覧
 nnoremap <silent> ;ur :<C-u>Unite -buffer-name=register register<CR>
+
 " 最近使用したファイル一覧
 nnoremap <silent> ;um :<C-u>Unite file_mru<CR>
+
 " 常用セット
 nnoremap <silent> ;uu :<C-u>Unite buffer file_mru<CR>
+
 " unite outline 
 nnoremap <silent> ;uo :<C-u>Unite outline<CR>
+
 " 全部乗せ
-nnoremap <silent> ;ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+nnoremap <silent> ;ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file outline<CR>
 
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
+
 
 " コマンドモードでよくやるやつ
 cnoremap <C-a> <Home>
@@ -195,43 +223,48 @@ cnoremap <C-b> <Left>
 cnoremap <C-d> <Del>
 
 cnoremap <C-k> <Up>
-cnoremap <C-l> <Down>
+cnoremap <C-j> <Down>
+cnoremap <C-h> <Left>
+cnoremap <C-l> <Right>
+
 
 " 挿入モードでの移動
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
-inoremap <C-f> <Right>
-inoremap <C-b> <Left>
+inoremap <C-h> <left>
+inoremap <C-l> <right>
+
+
+" カーソー固定
+nnoremap j gjzz
+nnoremap k gkzz
+
+
+" window操作
+nnoremap wh <C-w>h
+nnoremap wj <C-w>j
+nnoremap wk <C-w>k
+nnoremap wl <C-w>l
+
 
 " 全角スペース氏ね
 highlight SpecialKey cterm=NONE ctermfg=7 guifg=7
 highlight JpSpace cterm=underline ctermfg=7 guifg=7
 au BufRead,BufNew * match JpSpace /　/
 
-"
-" -------------------------------------------------------------------
-" HTML Key Mappings for Typing Character Codes
-"
-" |--------------------------------------------------------------------
-" |Keys     |Insert   |For  |Comment
-" |---------|---------|-----|-------------------------------------------
-" |\&       |&amp;    |&    |ampersand
-" |\<       |&lt;     |<    |less-than sign
-" |\>       |&gt;     |>    |greater-than sign
-" |\.       |&middot; |・   |middle dot (decimal point)
-" |\?       |&#8212;  |?    |em-dash
-" |\2       |&#8220;  |“   |open curved double quote
-" |\"       |&#8221;  |”   |close curved double quote
-" |\`       |&#8216;  |‘   |open curved single quote
-" |\'       |&#8217;  |’   |close curved single quote (apostrophe)
-" |\`       |`        |`    |OS-dependent open single quote
-" |\'       |'        |'    |OS-dependent close or vertical single quote
-" |\<Space> |&nbsp;   |     |non-breaking space
-" |---------------------------------------------------------------------
-"
-" > http://www.stripey.com/vim/html.html
-"
-"
+
+" rubyのメソッドやクラスをまとめて選択する(b:block用、m:def用、c:class用、M:module用)
+nnoremap vab 0/end<CR>%Vn
+nnoremap vib 0/end<CR>%kVnj
+nnoremap vam $?\%(.*#.*def\)\@!def<CR>%Vn
+nnoremap vim $?\%(.*#.*def\)\@!def<CR>%kVnj
+nnoremap vac $?\%(.*#.*class\)\@!class<CR>%Vn
+nnoremap vic $?\%(.*#.*class\)\@!class<CR>%kVnj
+nnoremap vaM $?\%(.*#.*module\)\@!module<CR>%Vn
+nnoremap viM $?\%(.*#.*module\)\@!module<CR>%kVnj
+
+
+" htmlサンショウモに
 autocmd BufEnter * if &filetype == "html" | call MapHTMLKeys() | endif
 function! MapHTMLKeys(...)
   if a:0 == 0 || a:1 != 0
@@ -262,6 +295,8 @@ function! MapHTMLKeys(...)
   endif " test for mapping/unmapping
 endfunction " MapHTMLKeys()
 
+
+
 " Setting for hatena-vim
 " -------------------------------------------
 set runtimepath+=$HOME/work/hatena
@@ -271,7 +306,8 @@ au BufRead,BufNewFile *.htn set filetype=hatena
 
 " Setting for twitvim
 " -------------------------------------------
-let twitvim_login = "shim0mura:vimdaisukilove" 
+"  password管理どうしたらいいんですか....
+let twitvim_login = "shim0mura:vimdaisukiloveaisiteru" 
 
 
 " Setting for vim-powerline
@@ -285,8 +321,22 @@ set t_Co=256
 let g:memolist_path = "~/work/memo"
 
 
+" Setting for surround.vim
+" -------------------------------------------
+"surroundに定義を追加する【ASCIIコードを調べるには:echo char2nr("-")】
+
+" '!' | '-' -> html comment
+let g:surround_33 = "<!-- \r -->"
+let g:surround_45 = "<!-- \r -->"
+" '%' -> erb section
+let g:surround_37 = "<% \r %>"
+" '#' -> 変数展開
+let g:surround_35 = "#{\r}"
+
+
 " Setting for NERDTree
 " -------------------------------------------
+"  うごかん...
 let file_name = expand("%:p")
 if has('vim_starting') &&  file_name == ""
     autocmd VimEnter :NERDTree ./
@@ -316,6 +366,8 @@ endif
 "endfunction
 "noremap <c-e> :<c-u>:call ExecuteNERDTree()<cr>
 "</cr></c-u></c-e>
+
+
 " Setting for neocomplcache
 " -------------------------------------------
 " Use neocomplcache.
