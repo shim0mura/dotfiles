@@ -122,6 +122,7 @@ set cursorline
 
 " syntax color
 " ---------------------
+set t_Co=256
 syntax on
 colorscheme torte
 highlight LineNr ctermfg=darkgray
@@ -144,6 +145,7 @@ set backspace=indent,eol,start
 set clipboard=unnamed
 set guioptions+=a
 set pastetoggle=<F12>
+set mouse=a
 
 
 " tab
@@ -171,13 +173,14 @@ set directory=~/vim_swap
 imap <C-K>  <ESC>"*pa
 
 " type command easily
-nnoremap <silent> <Space>.  :<C-u>edit $MYVIMRC<CR>
+nnoremap <silent> <Space>. :<C-u>edit $MYVIMRC<CR>
+nnoremap <silent> <Space>r :<C-u>source $MYGVIMRC<CR>
 nnoremap <Space>w :<C-u>write<Return>
 nnoremap <Space>q :<C-u>quit<Return>
 nnoremap <Space>Q :<C-u>quit!<Return>
 nnoremap <Space>h :help<space>
-nnoremap <Space>n :<C-u>new<space>
-nnoremap <Space>v :<C-u>vnew<space>
+nnoremap <Space>n :<C-u>new<space><Return>
+nnoremap <Space>v :<C-u>vnew<space><Return>
 
 
 " 行単位での移動
@@ -246,6 +249,15 @@ nnoremap wj <C-w>j
 nnoremap wk <C-w>k
 nnoremap wl <C-w>l
 
+" 括弧の中身選択
+vnoremap ( t(
+vnoremap ) t)
+vnoremap ] t]
+vnoremap [ t[
+onoremap ( t(
+onoremap ) t)
+onoremap ] t]
+onoremap [ t[
 
 " 全角スペース氏ね
 highlight SpecialKey cterm=NONE ctermfg=7 guifg=7
