@@ -4,6 +4,7 @@ cd ~
 ln -s dotfiles/.vimrc .vimrc
 ln -s dotfiles/.bashrc .bashrc
 ln -s dotfiles/.vim .vim
+ln -s dotfiles/.tmux.conf .byobu/
 
 mkdir vim_swap
 mkdir vim_backup
