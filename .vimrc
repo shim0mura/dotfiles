@@ -1,53 +1,3 @@
-" All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
-" /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
-" you can find below.  If you wish to change any of those settings, you should
-" do it in this file (/etc/vim/vimrc), since debian.vim will be overwritten
-" everytime an upgrade of the vim packages is performed.  It is recommended to
-" make changes after sourcing debian.vim since it alters the value of the
-" 'compatible' option.
-
-" This line should not be removed as it ensures that various options are
-" properly set to work with the Vim-related packages available in Debian.
-runtime! debian.vim
-
-" Uncomment the next line to make Vim more Vi-compatible
-" NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
-" options, so any other options should be set AFTER setting 'compatible'.
-"set compatible
-
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
-" line enables syntax highlighting by default.
-"if has("syntax")
-"  syntax on
-"endif
-
-" If using a dark background within the editing area and syntax highlighting
-" turn on this option as well
-" set background=dark
-
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
-"if has("autocmd")
-"  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-"endif
-
-" Uncomment the following to have Vim load indentation rules and plugins
-" according to the detected filetype.
-"if has("autocmd")
-"  filetype plugin indent on
-"endif
-
-" The following are commented out as they cause vim to behave a lot
-" differently from regular Vi. They are highly recommended though.
-"set showcmd		" Show (partial) command in status line.
-"set showmatch		" Show matching brackets.
-"set ignorecase		" Do case insensitive matching
-"set smartcase		" Do smart case matching
-"set incsearch		" Incremental search
-"set autowrite		" Automatically save before commands like :next and :make
-"set hidden             " Hide buffers when they are abandoned
-"set mouse=a		" Enable mouse usage (all modes)
-
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
@@ -62,7 +12,7 @@ set lcs=tab:>-,eol:-
 
 filetype off
 
-set runtimepath+=~/.vim/neobundle.vim
+set runtimepath+=~/.bundle/neobundle.vim
 call neobundle#rc(expand('~/.bundle'))
 
 NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
@@ -80,6 +30,7 @@ NeoBundle 'git://github.com/h1mesuke/unite-outline.git'
 NeoBundle 'git://github.com/ervandew/supertab.git'
 NeoBundle 'surround.vim'
 NeoBundle 'matchit.vim'
+NeoBundle 'ruby-matchit'
 NeoBundle 'srcexpl.vim'
 NeoBundle 'trinity.vim'
 NeoBundle 'NERD_tree.vim'
@@ -96,12 +47,14 @@ filetype indent on
 " ----------------------
 set number
 set ruler
+set scrolloff=7
 set cmdheight=1
 set laststatus=2
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 set title
 set linespace=0
 set wildmenu
+set wildmode=list:longest
 set showcmd
 set list
 set lcs=tab:>-
@@ -112,6 +65,14 @@ set ambiwidth=double
 "set columns=100
 "set lines=150
 "
+set splitbelow
+set splitright
+
+" for Japanese in gvim
+set noimdisable
+set noimcmdline
+set iminsert=1
+set imsearch=1
 
 " view
 " ---------------------
@@ -124,6 +85,8 @@ set cursorline
 " ---------------------
 set t_Co=256
 syntax on
+"set t_AB=[48;5;%dm
+"set t_AF=[38;5;%dm
 colorscheme torte
 highlight LineNr ctermfg=darkgray
 highlight CursorLine ctermbg=darkblue
@@ -146,6 +109,7 @@ set clipboard=unnamed
 set guioptions+=a
 set pastetoggle=<F12>
 set mouse=a
+set ttymouse=xterm2
 
 
 " tab
@@ -174,7 +138,7 @@ imap <C-K>  <ESC>"*pa
 
 " type command easily
 nnoremap <silent> <Space>. :<C-u>edit $MYVIMRC<CR>
-nnoremap <silent> <Space>r :<C-u>source $MYGVIMRC<CR>
+nnoremap <silent> <Space>r :<C-u>source $MYVIMRC<CR>
 nnoremap <Space>w :<C-u>write<Return>
 nnoremap <Space>q :<C-u>quit<Return>
 nnoremap <Space>Q :<C-u>quit!<Return>
@@ -182,6 +146,25 @@ nnoremap <Space>h :help<space>
 nnoremap <Space>n :<C-u>new<space><Return>
 nnoremap <Space>v :<C-u>vnew<space><Return>
 
+" insert time
+nnoremap <Space>t :<C-u>r!<space>date<space>"+\%H:\%M"<space><Return>
+
+
+" http://vim-users.jp/2009/09/hack74/
+" Set augroup.
+augroup MyAutoCmd
+    autocmd!
+augroup END
+
+if !has('gui_running') && !(has('win32') || has('win64'))
+    " .vimrcの再読込時にも色が変化するようにする
+    autocmd MyAutoCmd BufWritePost $MYVIMRC nested source $MYVIMRC
+else
+    " .vimrcの再読込時にも色が変化するようにする
+    autocmd MyAutoCmd BufWritePost $MYVIMRC source $MYVIMRC | 
+                \if has('gui_running') | source $MYGVIMRC  
+    autocmd MyAutoCmd BufWritePost $MYGVIMRC if has('gui_running') | source $MYGVIMRC
+endif
 
 " 行単位での移動
 nnoremap j gj
@@ -331,7 +314,9 @@ set t_Co=256
 " Setting for memolist.vim
 " -------------------------------------------
 let g:memolist_path = "~/work/memo"
-
+nnoremap <silent> ;ml  :MemoList<CR>
+nnoremap <silent> ;mn  :MemoNew<CR>
+nnoremap <silent> ;mg  :MemoGrep<CR>
 
 " Setting for surround.vim
 " -------------------------------------------
@@ -390,3 +375,14 @@ let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_enable_camel_case_completion = 1
 " Use underbar completion.
 let g:neocomplcache_enable_underbar_completion = 1
+
+" Setting for openbrowser
+" -------------------------------------------
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
+
+" command memo
+" ファイルを指定の文字コードで開き直す
+" :e ++enc=utf-8
+"
+"
