@@ -1,3 +1,5 @@
+runtime! debian.vim
+
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
@@ -20,6 +22,7 @@ NeoBundle 'git://github.com/Shougo/unite.vim.git'
 NeoBundle 'git://github.com/Shougo/neocomplcache.git'
 NeoBundle 'git://github.com/mattn/webapi-vim.git'
 NeoBundle 'git://github.com/mattn/twipass-vim.git'
+NeoBundle 'git://github.com/mattn/zencoding-vim.git'
 NeoBundle 'git://github.com/tyru/open-browser.vim.git'
 NeoBundle 'git://github.com/vim-ruby/vim-ruby.git'
 NeoBundle 'git://github.com/tpope/vim-rails.git'
@@ -27,7 +30,10 @@ NeoBundle 'git://github.com/thinca/vim-quickrun.git'
 NeoBundle 'git://github.com/Lokaltog/vim-powerline.git'
 NeoBundle 'git://github.com/glidenote/memolist.vim.git'
 NeoBundle 'git://github.com/h1mesuke/unite-outline.git'
+NeoBundle 'git://github.com/motemen/git-vim.git'
 NeoBundle 'git://github.com/ervandew/supertab.git'
+"NeoBundle 'git://github.com/kana/vim-tabpagecd.git'
+
 NeoBundle 'surround.vim'
 NeoBundle 'matchit.vim'
 NeoBundle 'ruby-matchit'
@@ -59,14 +65,11 @@ set showcmd
 set list
 set lcs=tab:>-
 " ウィンドウサイズの自動調整
-set noequalalways
 set ambiwidth=double
 "set textwidth=78
 "set columns=100
 "set lines=150
 "
-set splitbelow
-set splitright
 
 " for Japanese in gvim
 set noimdisable
@@ -85,8 +88,6 @@ set cursorline
 " ---------------------
 set t_Co=256
 syntax on
-"set t_AB=[48;5;%dm
-"set t_AF=[38;5;%dm
 colorscheme torte
 highlight LineNr ctermfg=darkgray
 highlight CursorLine ctermbg=darkblue
@@ -105,7 +106,7 @@ set hlsearch
 set autoindent
 set showmatch
 set backspace=indent,eol,start
-set clipboard=unnamed
+set clipboard+=unnamed,autoselect
 set guioptions+=a
 set pastetoggle=<F12>
 set mouse=a
@@ -136,6 +137,10 @@ set directory=~/vim_swap
 " paste clipboad in insert mode
 imap <C-K>  <ESC>"*pa
 
+" copy to clipboard in ubuntu
+vnoremap y "+y
+nnoremap yy "+yy
+
 " type command easily
 nnoremap <silent> <Space>. :<C-u>edit $MYVIMRC<CR>
 nnoremap <silent> <Space>r :<C-u>source $MYVIMRC<CR>
@@ -165,6 +170,14 @@ else
                 \if has('gui_running') | source $MYGVIMRC  
     autocmd MyAutoCmd BufWritePost $MYGVIMRC if has('gui_running') | source $MYGVIMRC
 endif
+
+" insert time
+nnoremap <Space>t :<C-u>r!<space>date<space>"+\%H:\%M"<Return>
+
+" tab motion
+nnoremap <C-L> :<c-u>tabnext<cr>
+nnoremap <C-H> :<c-u>tabprevious<cr>
+nnoremap <F2> :<c-u>tabnew<cr>
 
 " 行単位での移動
 nnoremap j gj
@@ -220,12 +233,6 @@ inoremap <C-e> <End>
 inoremap <C-h> <left>
 inoremap <C-l> <right>
 
-
-" カーソー固定
-nnoremap j gjzz
-nnoremap k gkzz
-
-
 " window操作
 nnoremap wh <C-w>h
 nnoremap wj <C-w>j
@@ -242,12 +249,6 @@ onoremap ) t)
 onoremap ] t]
 onoremap [ t[
 
-" 全角スペース氏ね
-highlight SpecialKey cterm=NONE ctermfg=7 guifg=7
-highlight JpSpace cterm=underline ctermfg=7 guifg=7
-au BufRead,BufNew * match JpSpace /　/
-
-
 " rubyのメソッドやクラスをまとめて選択する(b:block用、m:def用、c:class用、M:module用)
 nnoremap vab 0/end<CR>%Vn
 nnoremap vib 0/end<CR>%kVnj
@@ -257,6 +258,49 @@ nnoremap vac $?\%(.*#.*class\)\@!class<CR>%Vn
 nnoremap vic $?\%(.*#.*class\)\@!class<CR>%kVnj
 nnoremap vaM $?\%(.*#.*module\)\@!module<CR>%Vn
 nnoremap viM $?\%(.*#.*module\)\@!module<CR>%kVnj
+
+
+" タブに番号付ける
+" http://doruby.kbmj.com/aisi/20091218/Vim__
+function! GuiTabLabel()
+  let l:label = ''
+
+  let l:bufnrlist = tabpagebuflist(v:lnum)
+
+  let l:bufname = fnamemodify(bufname(l:bufnrlist[tabpagewinnr(v:lnum) - 1]), ':t')
+  let l:label .= l:bufname == '' ? 'No title' : l:bufname
+
+  let l:wincount = tabpagewinnr(v:lnum, '$')
+  if l:wincount > 1
+    let l:label .= '[' . l:wincount . ']'
+  endif
+
+  for bufnr in l:bufnrlist
+    if getbufvar(bufnr, "&modified")
+      let l:label .= '[+]'
+      break
+    endif
+  endfor
+
+  return l:label
+endfunction
+
+set guitablabel=%N:\ %{GuiTabLabel()}
+
+
+" tabのディレクトリ管理をタブ単位で行う
+" http://labs.timedia.co.jp/2012/05/vim-tabpagecd.html
+augroup plugin-tabpagecd
+  autocmd!
+
+  autocmd TabEnter *
+  \   if exists('t:cwd')
+  \ |   cd `=fnameescape(t:cwd)`
+  \ | endif
+
+  autocmd TabLeave *
+  \   let t:cwd = getcwd()
+augroup END
 
 
 " htmlサンショウモに
@@ -289,6 +333,7 @@ function! MapHTMLKeys(...)
     autocmd! BufLeave *
   endif " test for mapping/unmapping
 endfunction " MapHTMLKeys()
+
 
 
 
@@ -338,37 +383,11 @@ let file_name = expand("%:p")
 if has('vim_starting') &&  file_name == ""
     autocmd VimEnter :NERDTree ./
 endif
- 
-" カーソルが外れているときは自動的にnerdtreeを隠す
-"function! ExecuteNERDTree()
-"    "b:nerdstatus = 1 : NERDTree 表示中
-"    "b:nerdstatus = 2 : NERDTree 非表示中
-" 
-"    if !exists('g:nerdstatus')
-"        "execute 'NERDTree ./'
-"        let g:windowWidth = winwidth(winnr())
-"        let g:nerdtreebuf = bufnr('')
-"        let g:nerdstatus = 1 
-" 
-"    elseif g:nerdstatus == 1 
-"        execute 'wincmd t'
-"        execute 'vertical resize' 0 
-"        execute 'wincmd p'
-"        let g:nerdstatus = 2 
-"    elseif g:nerdstatus == 2 
-"        execute 'wincmd t'
-"        execute 'vertical resize' g:windowWidth
-"        let g:nerdstatus = 1 
-"    endif
-"endfunction
-"noremap <c-e> :<c-u>:call ExecuteNERDTree()<cr>
-"</cr></c-u></c-e>
-
 
 " Setting for neocomplcache
 " -------------------------------------------
 " Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
+ let g:neocomplcache_enable_at_startup = 1
 " Use smartcase.
 let g:neocomplcache_enable_smart_case = 1
 " Use camel case completion.
