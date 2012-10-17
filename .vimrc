@@ -5,6 +5,10 @@ if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
 
+" Source local customize
+if filereadable(expand('~/.vimrc.local'))
+  source ~/.vimrc.local
+endif
 
 "customed vim rc
 " referenced http://archiva.jp/web/tool/vimrc.html
@@ -23,6 +27,7 @@ NeoBundle 'git://github.com/Shougo/neocomplcache.git'
 NeoBundle 'git://github.com/mattn/webapi-vim.git'
 NeoBundle 'git://github.com/mattn/twipass-vim.git'
 NeoBundle 'git://github.com/mattn/zencoding-vim.git'
+NeoBundle 'git://github.com/mattn/vimplenote-vim.git'
 NeoBundle 'git://github.com/tyru/open-browser.vim.git'
 NeoBundle 'git://github.com/vim-ruby/vim-ruby.git'
 NeoBundle 'git://github.com/tpope/vim-rails.git'
@@ -33,9 +38,11 @@ NeoBundle 'git://github.com/h1mesuke/unite-outline.git'
 NeoBundle 'git://github.com/motemen/git-vim.git'
 NeoBundle 'git://github.com/ervandew/supertab.git'
 "NeoBundle 'git://github.com/kana/vim-tabpagecd.git'
+NeoBundle 'git://github.com/Lokaltog/vim-easymotion.git'
+NeoBundle 'git://github.com/tmhedberg/matchit.git'
 
 NeoBundle 'surround.vim'
-NeoBundle 'matchit.vim'
+"NeoBundle 'matchit.vim'
 NeoBundle 'ruby-matchit'
 NeoBundle 'srcexpl.vim'
 NeoBundle 'trinity.vim'
@@ -336,18 +343,11 @@ endfunction " MapHTMLKeys()
 
 
 
-
 " Setting for hatena-vim
 " -------------------------------------------
 set runtimepath+=$HOME/work/hatena
 let g:hatena_user='shim0mura'
 au BufRead,BufNewFile *.htn set filetype=hatena
-
-
-" Setting for twitvim
-" -------------------------------------------
-"  password管理どうしたらいいんですか....
-let twitvim_login = "shim0mura:vimdaisukiloveaisiteru" 
 
 
 " Setting for vim-powerline
@@ -362,6 +362,7 @@ let g:memolist_path = "~/work/memo"
 nnoremap <silent> ;ml  :MemoList<CR>
 nnoremap <silent> ;mn  :MemoNew<CR>
 nnoremap <silent> ;mg  :MemoGrep<CR>
+
 
 " Setting for surround.vim
 " -------------------------------------------
@@ -384,10 +385,11 @@ if has('vim_starting') &&  file_name == ""
     autocmd VimEnter :NERDTree ./
 endif
 
+
 " Setting for neocomplcache
 " -------------------------------------------
 " Use neocomplcache.
- let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_at_startup = 1
 " Use smartcase.
 let g:neocomplcache_enable_smart_case = 1
 " Use camel case completion.
@@ -395,13 +397,33 @@ let g:neocomplcache_enable_camel_case_completion = 1
 " Use underbar completion.
 let g:neocomplcache_enable_underbar_completion = 1
 
+
 " Setting for openbrowser
 " -------------------------------------------
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
+
+
+" Setting for easymotion
+" -------------------------------------------
+" ホームポジションに近いキーを使う
+let g:EasyMotion_keys = 'hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
+let g:EasyMotion_leader_key = '<Space><Space>'
+let g:EasyMotion_grouping = 1
+hi EasyMotionTarget ctermbg = none ctermfg = red
+hi EasyMotionShade  ctermbg = none ctermfg = blue
+
+
+" Setting for vimplenote
+" -------------------------------------------
+nnoremap <silent> ;sl  :VimpleNote -l<CR>
+nnoremap <silent> ;su  :VimpleNote -u<CR>
+nnoremap <silent> ;sn  :VimpleNote -n<CR>
+
 
 " command memo
 " ファイルを指定の文字コードで開き直す
 " :e ++enc=utf-8
 "
 "
+
