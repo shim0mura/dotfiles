@@ -1,5 +1,3 @@
-runtime! debian.vim
-
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
@@ -70,7 +68,6 @@ set wildmenu
 set wildmode=list:longest
 set showcmd
 set list
-set lcs=tab:>-
 " ウィンドウサイズの自動調整
 set ambiwidth=double
 "set textwidth=78
@@ -146,6 +143,7 @@ imap <C-K>  <ESC>"*pa
 
 " copy to clipboard in ubuntu
 vnoremap y "+y
+nnoremap y "+y
 nnoremap yy "+yy
 
 " type command easily
@@ -155,8 +153,8 @@ nnoremap <Space>w :<C-u>write<Return>
 nnoremap <Space>q :<C-u>quit<Return>
 nnoremap <Space>Q :<C-u>quit!<Return>
 nnoremap <Space>h :help<space>
-nnoremap <Space>n :<C-u>new<space><Return>
-nnoremap <Space>v :<C-u>vnew<space><Return>
+nnoremap <Space>n :<C-u>new<Return>
+nnoremap <Space>v :<C-u>vnew<Return>
 
 " insert time
 nnoremap <Space>t :<C-u>r!<space>date<space>"+\%H:\%M"<space><Return>
@@ -173,13 +171,11 @@ if !has('gui_running') && !(has('win32') || has('win64'))
     autocmd MyAutoCmd BufWritePost $MYVIMRC nested source $MYVIMRC
 else
     " .vimrcの再読込時にも色が変化するようにする
-    autocmd MyAutoCmd BufWritePost $MYVIMRC source $MYVIMRC | 
-                \if has('gui_running') | source $MYGVIMRC  
+    autocmd MyAutoCmd BufWritePost $MYVIMRC source $MYVIMRC |
+                \if has('gui_running') | source $MYGVIMRC
     autocmd MyAutoCmd BufWritePost $MYGVIMRC if has('gui_running') | source $MYGVIMRC
 endif
 
-" insert time
-nnoremap <Space>t :<C-u>r!<space>date<space>"+\%H:\%M"<Return>
 
 " tab motion
 nnoremap <C-L> :<c-u>tabnext<cr>
@@ -257,8 +253,8 @@ onoremap ] t]
 onoremap [ t[
 
 " rubyのメソッドやクラスをまとめて選択する(b:block用、m:def用、c:class用、M:module用)
-nnoremap vab 0/end<CR>%Vn
-nnoremap vib 0/end<CR>%kVnj
+nnoremap vab 0/\<end\><CR>%Vn
+nnoremap vib 0/\<end\><CR>%kVnj
 nnoremap vam $?\%(.*#.*def\)\@!def<CR>%Vn
 nnoremap vim $?\%(.*#.*def\)\@!def<CR>%kVnj
 nnoremap vac $?\%(.*#.*class\)\@!class<CR>%Vn
@@ -353,7 +349,6 @@ au BufRead,BufNewFile *.htn set filetype=hatena
 " Setting for vim-powerline
 " -------------------------------------------
 let g:Powerline_symbols = 'fancy'
-set t_Co=256
 
 
 " Setting for memolist.vim
@@ -379,10 +374,9 @@ let g:surround_35 = "#{\r}"
 
 " Setting for NERDTree
 " -------------------------------------------
-"  うごかん...
 let file_name = expand("%:p")
 if has('vim_starting') &&  file_name == ""
-    autocmd VimEnter :NERDTree ./
+    autocmd VimEnter * :NERDTree ./
 endif
 
 
@@ -410,8 +404,8 @@ vmap gx <Plug>(openbrowser-smart-search)
 let g:EasyMotion_keys = 'hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
 let g:EasyMotion_leader_key = '<Space><Space>'
 let g:EasyMotion_grouping = 1
-hi EasyMotionTarget ctermbg = none ctermfg = red
-hi EasyMotionShade  ctermbg = none ctermfg = blue
+hi EasyMotionTarget ctermbg=none ctermfg=red
+hi EasyMotionShade  ctermbg=none ctermfg=blue
 
 
 " Setting for vimplenote
@@ -424,6 +418,12 @@ nnoremap <silent> ;sn  :VimpleNote -n<CR>
 " command memo
 " ファイルを指定の文字コードで開き直す
 " :e ++enc=utf-8
+"
+" ファイルの文字コード変換
+" :setl fenc=utf8 "(or euc-jp or sjis etc...)
+"
+" ファイルの改行コード変換
+" :setl ff=dos "(or unix or mac)
 "
 "
 
