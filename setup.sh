@@ -7,6 +7,7 @@ ln -s dotfiles/.pryrc .pryrc
 ln -s dotfiles/.bashrc .bashrc
 ln -s dotfiles/.vim .vim
 ln -s dotfiles/.tmux.conf .byobu/
+ln -s dotfiles/.xmodmap .xmodmap
 
 mkdir vim_swap
 mkdir vim_backup
