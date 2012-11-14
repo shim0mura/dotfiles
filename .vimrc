@@ -38,13 +38,13 @@ NeoBundle 'git://github.com/ervandew/supertab.git'
 "NeoBundle 'git://github.com/kana/vim-tabpagecd.git'
 NeoBundle 'git://github.com/Lokaltog/vim-easymotion.git'
 NeoBundle 'git://github.com/tmhedberg/matchit.git'
+NeoBundle 'git://github.com/scrooloose/nerdtree.git'
+NeoBundle 'git://github.com/kien/ctlrp.git'
 
 NeoBundle 'surround.vim'
 "NeoBundle 'matchit.vim'
 NeoBundle 'ruby-matchit'
-NeoBundle 'srcexpl.vim'
 NeoBundle 'trinity.vim'
-NeoBundle 'NERD_tree.vim'
 NeoBundle 'taglist.vim'
 NeoBundle 'Javascript-syntax'
 NeoBundle 'TwitVim'
@@ -68,6 +68,8 @@ set wildmenu
 set wildmode=list:longest
 set showcmd
 set list
+set noautochdir
+set noequalalways
 " ウィンドウサイズの自動調整
 set ambiwidth=double
 "set textwidth=78
