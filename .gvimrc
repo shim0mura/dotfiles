@@ -1,4 +1,4 @@
-set guifont=Ricty\ 11
+set guifont=Migu1M
 set autoread
 set guioptions-=T "ツールバーなし
 set guioptions-=m "メニューバーなし

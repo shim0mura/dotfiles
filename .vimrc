@@ -22,6 +22,7 @@ call neobundle#rc(expand('~/.bundle'))
 NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
 NeoBundle 'git://github.com/Shougo/unite.vim.git'
 NeoBundle 'git://github.com/Shougo/neocomplcache.git'
+NeoBundle 'git://github.com/Shougo/vimfiler.git'
 NeoBundle 'git://github.com/mattn/webapi-vim.git'
 NeoBundle 'git://github.com/mattn/twipass-vim.git'
 NeoBundle 'git://github.com/mattn/zencoding-vim.git'
@@ -39,7 +40,7 @@ NeoBundle 'git://github.com/ervandew/supertab.git'
 NeoBundle 'git://github.com/Lokaltog/vim-easymotion.git'
 NeoBundle 'git://github.com/tmhedberg/matchit.git'
 NeoBundle 'git://github.com/scrooloose/nerdtree.git'
-NeoBundle 'git://github.com/kien/ctlrp.git'
+NeoBundle 'git://github.com/kien/ctlrp.vim.git'
 
 NeoBundle 'surround.vim'
 "NeoBundle 'matchit.vim'
@@ -308,7 +309,7 @@ augroup plugin-tabpagecd
 augroup END
 
 
-" htmlサンショウモに
+" html参照文字
 autocmd BufEnter * if &filetype == "html" | call MapHTMLKeys() | endif
 function! MapHTMLKeys(...)
   if a:0 == 0 || a:1 != 0
@@ -355,7 +356,7 @@ let g:Powerline_symbols = 'fancy'
 
 " Setting for memolist.vim
 " -------------------------------------------
-let g:memolist_path = "~/work/memo"
+let g:memolist_path = "~/Dropbox/memo"
 nnoremap <silent> ;ml  :MemoList<CR>
 nnoremap <silent> ;mn  :MemoNew<CR>
 nnoremap <silent> ;mg  :MemoGrep<CR>
