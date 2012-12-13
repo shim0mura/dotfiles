@@ -6,3 +6,5 @@ set guioptions-=r "右スクロールバーなし
 set guioptions-=l "左スクロールバーなし
 set guioptions-=b "下スクロールバーなし
 
+set iminsert
+set noimdisableactivate

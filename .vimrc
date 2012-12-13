@@ -31,7 +31,7 @@ NeoBundle 'git://github.com/tyru/open-browser.vim.git'
 NeoBundle 'git://github.com/vim-ruby/vim-ruby.git'
 NeoBundle 'git://github.com/tpope/vim-rails.git'
 NeoBundle 'git://github.com/thinca/vim-quickrun.git'
-NeoBundle 'git://github.com/Lokaltog/vim-powerline.git'
+"NeoBundle 'git://github.com/Lokaltog/vim-powerline.git'
 NeoBundle 'git://github.com/glidenote/memolist.vim.git'
 NeoBundle 'git://github.com/h1mesuke/unite-outline.git'
 NeoBundle 'git://github.com/motemen/git-vim.git'
@@ -41,6 +41,8 @@ NeoBundle 'git://github.com/Lokaltog/vim-easymotion.git'
 NeoBundle 'git://github.com/tmhedberg/matchit.git'
 NeoBundle 'git://github.com/scrooloose/nerdtree.git'
 NeoBundle 'git://github.com/kien/ctlrp.vim.git'
+NeoBundle 'git://github.com/tomasr/molokai.git'
+NeoBundle 'git://github.com/sgur/ctrlp-extensions.vim.git'
 
 NeoBundle 'surround.vim'
 "NeoBundle 'matchit.vim'
@@ -95,7 +97,7 @@ set cursorline
 " ---------------------
 set t_Co=256
 syntax on
-colorscheme torte
+colorscheme molokai
 highlight LineNr ctermfg=darkgray
 highlight CursorLine ctermbg=darkblue
 
@@ -416,6 +418,14 @@ hi EasyMotionShade  ctermbg=none ctermfg=blue
 nnoremap <silent> ;sl  :VimpleNote -l<CR>
 nnoremap <silent> ;su  :VimpleNote -u<CR>
 nnoremap <silent> ;sn  :VimpleNote -n<CR>
+
+
+" Setting for ctrlp
+" -------------------------------------------
+let g:ctrlp_working_path_mode = "rw"
+let g:ctrlp_highlight_match = [1, 'IncSearch']
+let g:ctrlp_extensions = ['cmdline', 'yankring', 'menu']
+let g:ctrlp_jump_to_buffer = 2
 
 
 " command memo
