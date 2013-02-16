@@ -31,7 +31,7 @@ NeoBundle 'git://github.com/tyru/open-browser.vim.git'
 NeoBundle 'git://github.com/vim-ruby/vim-ruby.git'
 NeoBundle 'git://github.com/tpope/vim-rails.git'
 NeoBundle 'git://github.com/thinca/vim-quickrun.git'
-"NeoBundle 'git://github.com/Lokaltog/vim-powerline.git'
+NeoBundle 'git://github.com/Lokaltog/vim-powerline.git'
 NeoBundle 'git://github.com/glidenote/memolist.vim.git'
 NeoBundle 'git://github.com/h1mesuke/unite-outline.git'
 NeoBundle 'git://github.com/motemen/git-vim.git'
@@ -40,14 +40,16 @@ NeoBundle 'git://github.com/ervandew/supertab.git'
 NeoBundle 'git://github.com/Lokaltog/vim-easymotion.git'
 NeoBundle 'git://github.com/tmhedberg/matchit.git'
 NeoBundle 'git://github.com/scrooloose/nerdtree.git'
-NeoBundle 'git://github.com/kien/ctlrp.vim.git'
+NeoBundle 'git://github.com/kien/ctrlp.vim.git'
 NeoBundle 'git://github.com/tomasr/molokai.git'
 NeoBundle 'git://github.com/sgur/ctrlp-extensions.vim.git'
+NeoBundle 'git://github.com/altercation/vim-colors-solarized.git'
 
 NeoBundle 'surround.vim'
 "NeoBundle 'matchit.vim'
 NeoBundle 'ruby-matchit'
 NeoBundle 'trinity.vim'
+NeoBundle 'jellybeans.vim'
 NeoBundle 'taglist.vim'
 NeoBundle 'Javascript-syntax'
 NeoBundle 'TwitVim'
@@ -91,15 +93,18 @@ set imsearch=1
 set showcmd
 set showmode
 set cursorline
-
+set listchars=eol:-,tab:>. 
 
 " syntax color
 " ---------------------
 set t_Co=256
 syntax on
-colorscheme molokai
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+set background=dark
+colorscheme solarized
 highlight LineNr ctermfg=darkgray
-highlight CursorLine ctermbg=darkblue
+highlight CursorLine ctermbg=white
 
 
 " search
