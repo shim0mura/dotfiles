@@ -14,11 +14,6 @@ if [ -e ~/.nvm/nvm.sh ]
     nvm use "v0.6.15" > /dev/null 2>&1
 fi
 
-# use rvm
-#source $HOME/.rvm/scripts/rvm
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
 export HISTSIZE=300000
 export JSTESTDRIVER_HOME=~/jstest
 

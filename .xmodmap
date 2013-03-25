@@ -1,5 +1,6 @@
 !remove Lock = Caps_Lock
 !keysym Caps_Lock = Control_L
 keycode 101 = Escape
+keycode 108 = Escape
 keycode 100 = BackSpace
 keycode 102 = Zenkaku_Hankaku

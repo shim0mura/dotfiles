@@ -42,8 +42,10 @@ NeoBundle 'git://github.com/tmhedberg/matchit.git'
 NeoBundle 'git://github.com/scrooloose/nerdtree.git'
 NeoBundle 'git://github.com/kien/ctrlp.vim.git'
 NeoBundle 'git://github.com/tomasr/molokai.git'
+NeoBundle 'git://github.com/jnurmine/Zenburn.git'
 NeoBundle 'git://github.com/sgur/ctrlp-extensions.vim.git'
 NeoBundle 'git://github.com/altercation/vim-colors-solarized.git'
+NeoBundle 'git://github.com/skwp/vim-rspec.git'
 
 NeoBundle 'surround.vim'
 "NeoBundle 'matchit.vim'
@@ -227,6 +229,11 @@ au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 
 
+" setting for rspec
+nnoremap <silent> ;rs :RunSpec<CR>
+nnoremap <silent> ;rl :RunSpecLine<CR>
+
+
 " コマンドモードでよくやるやつ
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
@@ -245,12 +252,6 @@ inoremap <C-a> <Home>
 inoremap <C-e> <End>
 inoremap <C-h> <left>
 inoremap <C-l> <right>
-
-" window操作
-nnoremap wh <C-w>h
-nnoremap wj <C-w>j
-nnoremap wk <C-w>k
-nnoremap wl <C-w>l
 
 " 括弧の中身選択
 vnoremap ( t(
