@@ -46,6 +46,7 @@ NeoBundle 'git://github.com/jnurmine/Zenburn.git'
 NeoBundle 'git://github.com/sgur/ctrlp-extensions.vim.git'
 NeoBundle 'git://github.com/altercation/vim-colors-solarized.git'
 NeoBundle 'git://github.com/skwp/vim-rspec.git'
+NeoBundle 'git://github.com/jpo/vim-railscasts-theme.git'
 
 NeoBundle 'surround.vim'
 "NeoBundle 'matchit.vim'
