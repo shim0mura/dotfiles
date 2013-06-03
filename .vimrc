@@ -12,7 +12,6 @@ endif
 " referenced http://archiva.jp/web/tool/vimrc.html
 set nocompatible
 set tags=~/.tags
-set lcs=tab:>-,eol:-
 
 filetype off
 
@@ -96,7 +95,7 @@ set imsearch=1
 set showcmd
 set showmode
 set cursorline
-set listchars=eol:-,tab:>. 
+set listchars=eol:↲,tab:>. 
 
 " syntax color
 " ---------------------
