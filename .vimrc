@@ -154,9 +154,9 @@ set directory=~/vim_swap
 imap <C-K>  <ESC>"*pa
 
 " copy to clipboard in ubuntu
-vnoremap y y
+vnoremap y "+y
 nnoremap y y
-nnoremap yy yy
+nnoremap yy "+yy
 
 " type command easily
 nnoremap <silent> <Space>. :<C-u>edit $MYVIMRC<CR>
