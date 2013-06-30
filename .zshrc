@@ -5,7 +5,7 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
+ZSH_THEME="dogenpunk"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -42,3 +42,8 @@ fi
 
 # Customize to your needs...
 #export PATH=/home/shim0mura/bin:/home/shim0mura/.rbenv/bin:/home/shim0mura/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+
+export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+export TMUX_POWERLINE_SEG_WEATHER_LOCATION="26237038"

@@ -229,6 +229,8 @@ nnoremap <silent> ;ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mr
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 
+" setting for alternative Esc
+imap <C-j> <esc>
 
 " setting for rspec
 nnoremap <silent> ;rs :RunSpec<CR>
