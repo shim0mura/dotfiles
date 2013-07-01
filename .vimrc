@@ -107,7 +107,7 @@ let g:solarized_termtrans=1
 set background=dark
 colorscheme solarized
 highlight LineNr ctermfg=darkgray
-highlight CursorLine ctermbg=white
+highlight CursorLine ctermbg=Blue
 
 
 " search
@@ -230,7 +230,8 @@ au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 
 " setting for alternative Esc
-imap <C-j> <esc>
+nnoremap <C-j> <esc>
+vnoremap <C-j> <esc>
 
 " setting for rspec
 nnoremap <silent> ;rs :RunSpec<CR>
