@@ -1,4 +1,5 @@
-set guifont=Migu1M
+set guifont=Monaco:h11
+set guifontwide=Ricty_for_Powerline:h11
 set autoread
 set guioptions-=T "ツールバーなし
 set guioptions-=m "メニューバーなし

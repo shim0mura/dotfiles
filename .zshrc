@@ -43,7 +43,7 @@ fi
 # Customize to your needs...
 #export PATH=/home/shim0mura/bin:/home/shim0mura/.rbenv/bin:/home/shim0mura/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
 
-export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:/usr/local/bin:$PATH"
 eval "$(rbenv init -)"
 
 export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim

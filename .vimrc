@@ -54,9 +54,9 @@ NeoBundle 'ruby-matchit'
 NeoBundle 'trinity.vim'
 NeoBundle 'jellybeans.vim'
 NeoBundle 'taglist.vim'
-NeoBundle 'Javascript-syntax'
 NeoBundle 'TwitVim'
 NeoBundle 'sudo.vim'
+NeoBundle 'taglist.vim'
 
 filetype plugin on
 filetype indent on
@@ -104,7 +104,7 @@ set t_Co=256
 syntax on
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
-set background=dark
+set background=light
 colorscheme solarized
 highlight LineNr ctermfg=darkgray
 highlight CursorLine ctermbg=Blue
@@ -231,6 +231,7 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 
 " setting for alternative Esc
 nnoremap <C-j> <esc>
+inoremap <C-j> <esc>
 vnoremap <C-j> <esc>
 
 " setting for rspec
@@ -436,6 +437,12 @@ let g:ctrlp_working_path_mode = "rw"
 let g:ctrlp_highlight_match = [1, 'IncSearch']
 let g:ctrlp_extensions = ['cmdline', 'yankring', 'menu']
 let g:ctrlp_jump_to_buffer = 2
+
+" Setting for Taglist.vim
+" -------------------------------------------
+let Tlist_Show_One_File = 1
+let Tlist_Use_Right_Window = 1
+let Tlist_Exit_OnlyWindow = 1
 
 
 " command memo
