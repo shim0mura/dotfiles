@@ -45,7 +45,6 @@ NeoBundle 'git://github.com/jnurmine/Zenburn.git'
 NeoBundle 'git://github.com/sgur/ctrlp-extensions.vim.git'
 NeoBundle 'git://github.com/altercation/vim-colors-solarized.git'
 NeoBundle 'git://github.com/skwp/vim-rspec.git'
-NeoBundle 'git://github.com/jpo/vim-railscasts-theme.git'
 NeoBundle 'git://github.com/kannokanno/previm.git'
 
 NeoBundle 'surround.vim'
@@ -56,7 +55,7 @@ NeoBundle 'jellybeans.vim'
 NeoBundle 'taglist.vim'
 NeoBundle 'TwitVim'
 NeoBundle 'sudo.vim'
-NeoBundle 'taglist.vim'
+NeoBundle 'rking/ag.vim'
 
 filetype plugin on
 filetype indent on
@@ -86,9 +85,9 @@ set ambiwidth=double
 "
 
 " for Japanese in gvim
-set noimdisable
+set imdisable
 set noimcmdline
-set iminsert=1
+set iminsert=2
 set imsearch=1
 
 " view
@@ -107,7 +106,7 @@ let g:solarized_termtrans=1
 set background=light
 colorscheme solarized
 highlight LineNr ctermfg=darkgray
-highlight CursorLine ctermbg=Blue
+highlight CursorLine ctermbg=cyan
 
 
 " search
@@ -155,9 +154,9 @@ set directory=~/vim_swap
 imap <C-K>  <ESC>"*pa
 
 " copy to clipboard in ubuntu
-vnoremap y "+y
-nnoremap y y
-nnoremap yy "+yy
+" vnoremap y "+y
+" nnoremap y y
+" nnoremap yy "+yy
 
 " type command easily
 nnoremap <silent> <Space>. :<C-u>edit $MYVIMRC<CR>
@@ -196,10 +195,10 @@ nnoremap <C-H> :<c-u>tabprevious<cr>
 nnoremap <F2> :<c-u>tabnew<cr>
 
 " 行単位での移動
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
+"nnoremap j gj
+"nnoremap k gk
+"vnoremap j gj
+"vnoremap k gk
 
 
 " Setting for Unite.vim
@@ -364,7 +363,7 @@ au BufRead,BufNewFile *.htn set filetype=hatena
 
 " Setting for vim-powerline
 " -------------------------------------------
-let g:Powerline_symbols = 'fancy'
+let g:Powerline_symbols="fancy"
 
 
 " Setting for memolist.vim
