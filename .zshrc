@@ -36,9 +36,9 @@ plugins=(git ruby rails)
 
 source $ZSH/oh-my-zsh.sh
 #
-if ( ! test $TMUX ) && ( ! expr $TERM : "^screen" > /dev/null ) && which tmux > /dev/null; then
-  tmux -2
-fi
+# if ( ! test $TMUX ) && ( ! expr $TERM : "^screen" > /dev/null ) && which tmux > /dev/null; then
+#   tmux -2
+# fi
 
 # Customize to your needs...
 #export PATH=/home/shim0mura/bin:/home/shim0mura/.rbenv/bin:/home/shim0mura/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
@@ -54,4 +54,5 @@ export TMUX_POWERLINE_SEG_WEATHER_LOCATION="26237038"
 
 if [ -r $HOME/.custom_alias ]; then
   source $HOME/.custom_alias
+  source $HOME/.custom_path
 fi

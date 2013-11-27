@@ -33,9 +33,8 @@ NeoBundle 'git://github.com/thinca/vim-quickrun.git'
 NeoBundle 'git://github.com/Lokaltog/vim-powerline.git'
 NeoBundle 'git://github.com/glidenote/memolist.vim.git'
 NeoBundle 'git://github.com/h1mesuke/unite-outline.git'
-NeoBundle 'git://github.com/motemen/git-vim.git'
 NeoBundle 'git://github.com/ervandew/supertab.git'
-"NeoBundle 'git://github.com/kana/vim-tabpagecd.git'
+NeoBundle 'git://github.com/motemen/git-vim.git'
 NeoBundle 'git://github.com/Lokaltog/vim-easymotion.git'
 NeoBundle 'git://github.com/tmhedberg/matchit.git'
 NeoBundle 'git://github.com/scrooloose/nerdtree.git'
@@ -56,6 +55,8 @@ NeoBundle 'taglist.vim'
 NeoBundle 'TwitVim'
 NeoBundle 'sudo.vim'
 NeoBundle 'rking/ag.vim'
+NeoBundle 'rking/ag.vim'
+NeoBundle 'fugitive.vim'
 
 filetype plugin on
 filetype indent on
@@ -188,7 +189,6 @@ else
     autocmd MyAutoCmd BufWritePost $MYGVIMRC if has('gui_running') | source $MYGVIMRC
 endif
 
-
 " tab motion
 nnoremap <C-L> :<c-u>tabnext<cr>
 nnoremap <C-H> :<c-u>tabprevious<cr>
@@ -305,6 +305,15 @@ endfunction
 
 set guitablabel=%N:\ %{GuiTabLabel()}
 
+" ime setting
+if has('multi_byte_ime') || has('xim') || has('gui_macvim')
+  " Insert mode: lmap off, IME ON
+  set iminsert=2
+  " Serch mode: lmap off, IME ON
+  set imsearch=2
+  " Normal mode: IME off
+  inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
+endif
 
 " tabのディレクトリ管理をタブ単位で行う
 " http://labs.timedia.co.jp/2012/05/vim-tabpagecd.html
@@ -351,6 +360,19 @@ function! MapHTMLKeys(...)
     autocmd! BufLeave *
   endif " test for mapping/unmapping
 endfunction " MapHTMLKeys()
+
+" ファイル保存時にmkdir
+" http://vim-users.jp/2011/02/hack202/
+augroup vimrc-auto-mkdir  " {{{
+  autocmd!
+  autocmd BufWritePre * call s:auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
+  function! s:auto_mkdir(dir, force)  " {{{
+    if !isdirectory(a:dir) && (a:force ||
+    \    input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
+      call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
+    endif
+  endfunction  " }}}
+augroup END  " }}}
 
 
 
