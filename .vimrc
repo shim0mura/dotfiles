@@ -24,7 +24,6 @@ NeoBundle 'git://github.com/Shougo/neocomplcache.git'
 NeoBundle 'git://github.com/Shougo/vimfiler.git'
 NeoBundle 'git://github.com/mattn/webapi-vim.git'
 NeoBundle 'git://github.com/mattn/twipass-vim.git'
-NeoBundle 'git://github.com/mattn/zencoding-vim.git'
 NeoBundle 'git://github.com/mattn/vimplenote-vim.git'
 NeoBundle 'git://github.com/tyru/open-browser.vim.git'
 NeoBundle 'git://github.com/vim-ruby/vim-ruby.git'
@@ -105,6 +104,7 @@ syntax on
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 set background=light
+
 colorscheme solarized
 highlight LineNr ctermfg=darkgray
 highlight CursorLine ctermbg=cyan
